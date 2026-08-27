@@ -1,0 +1,287 @@
+<div class="min-h-screen bg-gray-50">
+
+    <!-- Header -->
+    <header class="flex h-20 items-center justify-between
+           border-b border-knoz-border bg-white
+           px-6 lg:px-10">
+
+        <div>
+            <h1 class="text-xl font-semibold text-knoz-green">
+                <!-- Create Certificate -->
+                {{ getText('createCertificate') }}
+            </h1>
+
+            <p class="mt-1 text-sm text-gray-500">
+                <!-- Generate a professional student certificate -->
+                {{ getText('generateProfessionalCertificate') }}
+            </p>
+        </div>
+
+    </header>
+
+
+    <!-- Form -->
+    <main class="mx-auto max-w-4xl px-6 py-10">
+
+        <a routerLink="/dashboard" class="inline-flex items-center gap-2
+         text-sm font-medium text-knoz-green
+         transition hover:text-knoz-gold">
+            {{ direction === 'rtl' ? '→' : '←' }}
+            {{ getText('backToDashboard') }}
+        </a>
+        <form [formGroup]="certificateForm" (ngSubmit)="onSubmit()" class="rounded-2xl border border-knoz-border
+             bg-white p-6 shadow-sm lg:p-8">
+
+            <!-- Form content -->
+
+            <!-- student name -->
+            <div>
+                <label for="studentName" class="block text-sm font-semibold text-knoz-green">
+                    <!-- Student Name -->
+                     {{ getText('studentName') }}
+                </label>
+
+                <input id="studentName" type="text" formControlName="studentName"
+                    placeholder="{{getText('studentNamePlaceholder')}}" class="mt-2 w-full rounded-xl border
+           border-knoz-border bg-white px-4 py-3
+           text-knoz-text outline-none
+           transition
+           focus:border-knoz-gold
+           focus:ring-2 focus:ring-knoz-gold/20" />
+
+                @if (
+                certificateForm.controls.studentName.touched &&
+                certificateForm.controls.studentName.invalid
+                ) {
+                <p class="mt-2 text-sm text-red-600">
+                    <!-- Please enter the student's name. -->
+                     {{ getText('confirmationStudentEnter') }}
+                </p>
+                }
+            </div>
+
+
+            <!-- course name -->
+            <div class="mt-6">
+
+                <label for="courseName" class="block text-sm font-semibold text-knoz-green">
+                    <!-- Course / Subject -->
+                     {{ getText('courseSubject') }}
+                </label>
+
+                <input id="courseName" type="text" formControlName="courseName"
+                    placeholder="{{getText('courseSubjectPlaceholder')}}" class="mt-2 w-full rounded-xl border
+           border-knoz-border bg-white px-4 py-3
+           text-knoz-text outline-none
+           transition
+           focus:border-knoz-gold
+           focus:ring-2 focus:ring-knoz-gold/20" />
+
+                @if (
+                certificateForm.controls.courseName.touched &&
+                certificateForm.controls.courseName.invalid
+                ) {
+                <p class="mt-2 text-sm text-red-600">
+                    <!-- Please enter the course or subject name. -->
+                     {{ getText('confirmationCoursetEnter') }}
+                </p>
+                }
+
+            </div>
+
+
+            <!-- language -->
+            <div class="mt-8">
+
+                <label class="block text-sm font-semibold text-knoz-green">
+                    <!-- Certificate Language -->
+                     {{ getText('certificateLanguage') }}
+                </label>
+
+                <div class="mt-3 grid gap-3 sm:grid-cols-2">
+
+                    <!-- English -->
+                    <label
+                        [class]="certificateForm.controls.language.value === 'en'
+                ? 'cursor-pointer rounded-xl border border-knoz-gold bg-knoz-cream p-4 text-center transition'
+                : 'cursor-pointer rounded-xl border border-knoz-border bg-white p-4 text-center transition hover:border-knoz-gold'">
+
+                        <input type="radio" formControlName="language" value="en" class="sr-only" />
+
+                        <span class="font-semibold text-knoz-green">
+                            English
+                        </span>
+
+                    </label>
+
+
+                    <!-- Arabic -->
+                    <label
+                        [class]="certificateForm.controls.language.value === 'ar'
+                ? 'cursor-pointer rounded-xl border border-knoz-gold bg-knoz-cream p-4 text-center transition'
+                : 'cursor-pointer rounded-xl border border-knoz-border bg-white p-4 text-center transition hover:border-knoz-gold'">
+
+                        <input type="radio" formControlName="language" value="ar" class="sr-only" />
+
+                        <span class="font-semibold text-knoz-green">
+                            العربية
+                        </span>
+
+                    </label>
+
+
+
+
+                </div>
+
+            </div>
+
+            <!-- date -->
+            <!-- <div class="mt-8">
+
+                <label class="block text-sm font-semibold text-knoz-green">
+                    Issue Date
+                </label>
+
+                <div class="mt-2 rounded-xl border border-knoz-border
+           bg-gray-50 px-4 py-3 text-sm text-gray-500">
+                    Automatically generated when the certificate is created.
+                </div>
+
+            </div> -->
+
+            <!-- Issue Date -->
+            <div class="mt-8">
+
+                <!-- Section Title -->
+                <label class="block text-sm font-semibold text-knoz-green">
+                    <!-- Issue Date -->
+                     {{ getText('issueDate') }}
+
+                </label>
+
+                <p class="mt-1 text-sm text-gray-500">
+                    <!-- Choose how the certificate issue date should be set. -->
+                     {{ getText('chooseIssueDate') }}
+                </p>
+
+
+                <!-- Date Options -->
+                <div class="mt-4 grid gap-3 sm:grid-cols-2">
+
+
+                    <!-- Today Option -->
+                    <label [class]="certificateForm.controls.dateType.value === 'today'
+        ? 'cursor-pointer rounded-xl border border-knoz-gold bg-knoz-cream p-4 transition'
+        : 'cursor-pointer rounded-xl border border-knoz-border bg-white p-4 transition hover:border-knoz-gold'">
+
+                        <div class="flex items-start gap-3">
+
+                            <input type="radio" formControlName="dateType" value="today" class="mt-1" />
+
+                            <div>
+
+                                <p class="font-semibold text-knoz-green">
+                                    <!-- Use Today's Date -->
+                                     {{ getText('useTodayDate') }}
+                                </p>
+
+                                <p class="mt-1 text-sm text-gray-500">
+                                    <!-- The current date will be added automatically. -->
+                                     {{ getText('todayDateDescription') }}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </label>
+
+
+                    <!-- Custom Date Option -->
+                    <label [class]="certificateForm.controls.dateType.value === 'custom'
+        ? 'cursor-pointer rounded-xl border border-knoz-gold bg-knoz-cream p-4 transition'
+        : 'cursor-pointer rounded-xl border border-knoz-border bg-white p-4 transition hover:border-knoz-gold'">
+
+                        <div class="flex items-start gap-3">
+
+                            <input type="radio" formControlName="dateType" value="custom" class="mt-1" />
+
+                            <div>
+
+                                <p class="font-semibold text-knoz-green">
+                                    <!-- Choose a Date -->
+                                     {{ getText('chooseDate') }}
+                                </p>
+
+                                <p class="mt-1 text-sm text-gray-500">
+                                    <!-- Select a previous date or today. -->
+                                     {{ getText('chooseDateDescription') }}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </label>
+
+                </div>
+
+
+                <!-- Calendar -->
+                @if (isCustomDate) {
+
+                <div class="mt-4">
+
+                    <label for="issueDate" class="block text-sm font-semibold text-knoz-green">
+                        <!-- Select Issue Date -->
+                         {{ getText('selectIssueDate') }}
+                         
+                    </label>
+
+                    <input id="issueDate" type="date" formControlName="issueDate" [max]="yesterday" class="mt-2 w-full rounded-xl border
+               border-knoz-border bg-white px-4 py-3
+               text-knoz-text outline-none
+               transition
+               focus:border-knoz-gold
+               focus:ring-2 focus:ring-knoz-gold/20" />
+
+                    @if (
+                    certificateForm.controls.issueDate.touched &&
+                    certificateForm.controls.issueDate.invalid
+                    ) {
+
+                    <p class="mt-2 text-sm text-red-600">
+                        <!-- Please select an issue date. -->
+                         {{ getText('PleaseSelectIssuedate') }}
+                    </p>
+
+                    }
+
+                </div>
+
+                }
+
+            </div>
+            <!-- generate button -->
+            <div class="mt-10 flex justify-end
+         border-t border-knoz-border pt-6">
+
+                <button type="submit" [disabled]="certificateForm.invalid" class="rounded-xl bg-knoz-gold px-7 py-3
+           font-semibold text-knoz-green
+           shadow-sm transition
+           hover:-translate-y-0.5
+           hover:shadow-lg
+           disabled:cursor-not-allowed
+           disabled:opacity-50">
+                    <!-- Generate Certificate -->
+                     {{ getText('generateCertificate') }}
+                </button>
+
+            </div>
+
+        </form>
+
+    </main>
+
+</div>

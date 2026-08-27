@@ -1,0 +1,546 @@
+<div class="min-h-screen bg-gray-100"
+     [attr.dir]="pageDirection">
+
+  <!-- =========================
+       Header
+       ========================= -->
+  <header
+    class="no-print flex flex-col gap-4
+           border-b border-knoz-border
+           bg-white px-4 py-4
+           sm:flex-row sm:items-center
+           sm:justify-between
+           sm:px-6
+           lg:px-10">
+
+    <!-- Page Title -->
+    <div class="min-w-0">
+
+      <h1 class="text-lg font-semibold
+                 text-knoz-green
+                 sm:text-xl">
+
+        {{ getPageText('certificatePreview') }}
+
+      </h1>
+
+      <p class="mt-1 text-xs
+                text-gray-500
+                sm:text-sm">
+
+        {{ getPageText('reviewCertificate') }}
+
+      </p>
+
+    </div>
+
+
+    <!-- Actions -->
+    <div
+      class="no-print flex w-full flex-col gap-2
+             sm:w-auto sm:flex-row sm:items-center
+             sm:gap-3">
+
+      <!-- Print -->
+      <button
+        type="button"
+        (click)="printCertificate()"
+
+        class="w-full rounded-lg
+               bg-knoz-gold px-4 py-2
+               text-sm font-semibold
+               text-knoz-green
+               transition hover:opacity-90
+               sm:w-auto sm:px-5">
+
+        {{ getPageText('downloadCertificate') }}
+
+      </button>
+
+
+      <!-- Back -->
+      <a
+        routerLink="/certificates/create"
+
+        class="w-full rounded-lg
+               px-4 py-2 text-center
+               text-sm font-medium
+               text-knoz-green
+               transition hover:bg-knoz-cream
+               sm:w-auto">
+
+        {{ pageDirection === 'rtl' ? '→' : '←' }}
+
+        {{ getPageText('back') }}
+
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       Preview Area
+       ========================= -->
+  <main
+    class="certificate-preview-area
+           flex min-h-[calc(100vh-5rem)]
+           items-start justify-start
+           overflow-x-auto overflow-y-auto
+           p-3
+           sm:items-center sm:justify-center
+           sm:p-6
+           lg:p-8">
+
+
+    <!-- Certificate Wrapper -->
+    <div
+      class="certificate-wrapper
+             flex min-w-full
+             justify-start
+             sm:justify-center">
+
+
+      <!-- =========================
+           Certificate
+           ========================= -->
+      <div
+        #certificateElement
+
+        class="certificate-print relative
+               aspect-[297/210]
+
+               w-[700px]
+               max-w-none
+               shrink-0
+
+               overflow-hidden
+               bg-[#FDFCF8]
+               shadow-2xl
+
+               sm:w-full
+               sm:max-w-5xl">
+
+        <!-- =========================
+             Gold Border
+             ========================= -->
+        <div
+          class="absolute inset-2
+                 border border-knoz-gold
+                 sm:inset-3 sm:border-2
+                 lg:inset-5">
+        </div>
+
+
+        <!-- =========================
+             Inner Border
+             ========================= -->
+        <div
+          class="absolute inset-4
+                 border border-knoz-gold/40
+                 sm:inset-6
+                 lg:inset-8">
+        </div>
+
+
+        <!-- =========================
+             Certificate Content
+             ========================= -->
+        <div
+          class="relative z-10
+                 flex h-full flex-col
+                 px-5 py-5
+                 text-center
+                 sm:px-10 sm:py-7
+                 lg:px-16 lg:py-10"
+
+          [attr.dir]="direction">
+
+
+          <!-- =========================
+               Main Content
+               ========================= -->
+          <div
+            class="certificate-main-content
+                   flex w-full flex-1
+                   flex-col items-center
+                   justify-around">
+
+
+            <!-- =========================
+                 Logo
+                 ========================= -->
+            <div
+              class="certificate-brand
+                     flex flex-col items-center">
+
+              <img
+                src="/assets/logo.jpeg"
+                alt="Knoz Academy"
+
+                class="h-9 w-auto object-contain
+                       sm:h-12
+                       lg:h-20"
+              />
+
+
+              <p
+                class="mt-1 text-[7px]
+                       font-semibold
+                       tracking-[0.25em]
+                       text-knoz-green
+
+                       sm:mt-2
+                       sm:text-[9px]
+
+                       lg:text-sm
+                       lg:tracking-[0.35em]">
+
+                {{ getText('academyName') }}
+
+              </p>
+
+            </div>
+
+
+            <!-- =========================
+                 Certificate Title
+                 ========================= -->
+            <div
+              class="certificate-title
+                     mt-2
+                     sm:mt-3
+                     lg:mt-4">
+
+              <h2
+                class="font-serif
+                       text-sm font-bold
+                       uppercase
+                       tracking-[0.08em]
+                       text-knoz-green
+
+                       sm:text-xl
+
+                       lg:text-4xl
+                       lg:tracking-[0.12em]">
+
+                {{ getText('certificateTitle') }}
+
+              </h2>
+
+
+              <div
+                class="mx-auto mt-1
+                       h-0.5 w-12
+                       bg-knoz-gold
+
+                       sm:mt-2
+                       sm:w-20
+
+                       lg:mt-3
+                       lg:w-24">
+              </div>
+
+            </div>
+
+
+            <!-- =========================
+                 Student
+                 ========================= -->
+            <div
+              class="certificate-student
+                     mt-3
+                     sm:mt-4
+                     lg:mt-5">
+
+              <p
+                class="text-[8px]
+                       italic
+                       text-gray-500
+
+                       sm:text-[10px]
+                       lg:text-sm">
+
+                {{ getText('presentedTo') }}
+
+              </p>
+
+
+              <h3
+                class="mt-1
+                       max-w-[600px]
+                       truncate
+                       font-serif
+                       text-base
+                       font-bold
+                       text-knoz-green
+
+                       sm:mt-2
+                       sm:text-2xl
+
+                       lg:mt-3
+                       lg:text-5xl">
+
+                {{ certificate?.studentName }}
+
+              </h3>
+
+            </div>
+
+
+            <!-- =========================
+                 Course
+                 ========================= -->
+            <div
+              class="certificate-course
+                     mt-2
+                     sm:mt-3
+                     lg:mt-4">
+
+              <p
+                class="text-[8px]
+                       text-gray-500
+
+                       sm:text-[10px]
+                       lg:text-sm">
+
+                {{ getText('successfullyCompleted') }}
+
+              </p>
+
+
+              <p
+                class="mt-1
+                       max-w-[600px]
+                       truncate
+                       text-xs
+                       font-semibold
+                       text-knoz-green
+
+                       sm:text-base
+
+                       lg:mt-2
+                       lg:text-2xl">
+
+                {{ certificate?.courseName }}
+
+              </p>
+
+            </div>
+
+
+            <!-- =========================
+                 Decoration
+                 ========================= -->
+            <div
+              class="certificate-decoration
+                     mt-2
+                     flex items-center gap-2
+
+                     sm:mt-3
+                     sm:gap-3
+
+                     lg:mt-4">
+
+              <div
+                class="h-px w-8
+                       bg-knoz-gold/60
+                       sm:w-12
+                       lg:w-16">
+              </div>
+
+
+              <span
+                class="text-xs text-knoz-gold
+                       sm:text-base
+                       lg:text-lg">
+
+                ✦
+
+              </span>
+
+
+              <div
+                class="h-px w-8
+                       bg-knoz-gold/60
+                       sm:w-12
+                       lg:w-16">
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- =========================
+               Footer
+               ========================= -->
+          <div
+            class="certificate-footer
+                   grid w-full shrink-0
+                   grid-cols-3
+                   items-start
+                   gap-3 px-2
+
+                   sm:gap-6
+                   lg:gap-8">
+
+
+            <!-- =========================
+                 Issue Date
+                 ========================= -->
+            <div
+              class="flex flex-col
+                     items-start
+                     justify-start">
+
+              <!-- Date -->
+              <div
+                class="flex h-7
+                       items-end
+
+                       sm:h-10
+                       lg:h-14">
+
+                <p
+                  class="whitespace-nowrap
+                         text-[8px]
+                         font-semibold
+                         text-knoz-green
+
+                         sm:text-[10px]
+                         lg:text-sm">
+
+                  {{ certificate?.issueDate | date:'dd MMMM yyyy' }}
+
+                </p>
+
+              </div>
+
+
+              <!-- Line -->
+              <div
+                class="mt-1 h-px w-16
+                       bg-knoz-gold/50
+
+                       sm:w-24
+
+                       lg:mt-2
+                       lg:w-32">
+              </div>
+
+
+              <!-- Issue Date -->
+              <p
+                class="mt-1
+                       text-[7px]
+                       text-gray-400
+
+                       sm:text-[9px]
+                       lg:text-xs">
+
+                {{ getText('issueDate') }}
+
+              </p>
+
+            </div>
+
+
+            <!-- =========================
+                 QR Code
+                 ========================= -->
+            <div
+              class="certificate-qr
+                     flex items-center
+                     justify-center
+                     self-center">
+
+              <img
+                [src]="qrCodeUrl"
+                alt="Certificate QR Code"
+
+                class="block
+                       h-10 w-10
+                       object-contain
+
+                       sm:h-14 sm:w-14
+                       lg:h-20 lg:w-20"
+              />
+
+            </div>
+
+
+            <!-- =========================
+                 Signature
+                 ========================= -->
+            <div
+              class="flex flex-col
+                     items-center
+                     justify-start">
+
+              <!-- Signature -->
+              <div
+                class="flex h-7
+                       items-end
+                       justify-center
+
+                       sm:h-10
+                       lg:h-14">
+
+                <img
+                  src="/assets/Signature.png"
+                  alt="Academic Director Signature"
+
+                  class="certificate-signature
+                         max-h-7
+                         w-auto
+                         object-contain
+
+                         sm:max-h-10
+                         lg:max-h-14"
+                />
+
+              </div>
+
+
+              <!-- Line -->
+              <div
+                class="mt-1 h-px w-20
+                       bg-knoz-gold/50
+
+                       sm:w-28
+
+                       lg:mt-2
+                       lg:w-36">
+              </div>
+
+
+              <!-- Academic Director -->
+              <p
+                class="mt-1
+                       whitespace-nowrap
+                       text-[7px]
+                       font-medium
+                       text-gray-500
+
+                       sm:text-[9px]
+                       lg:text-xs">
+
+                {{ getText('academicDirector') }}
+
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>

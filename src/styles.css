@@ -1,3 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+@theme {
+    --color-knoz-green: #0F392B;
+    --color-knoz-gold: #C8A559;
+    --color-knoz-cream: #F7F3E8;
+
+    --color-knoz-text: #1F2933;
+    --color-knoz-muted: #6B7280;
+    --color-knoz-border: #DDE3E0;
+}
