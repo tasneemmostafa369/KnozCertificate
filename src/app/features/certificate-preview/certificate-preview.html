@@ -1,9 +1,12 @@
-<div class="min-h-screen bg-gray-100"
-     [attr.dir]="pageDirection">
+<div
+  class="min-h-screen bg-gray-100"
+  [attr.dir]="pageDirection"
+>
 
-  <!-- =========================
-       Header
-       ========================= -->
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
   <header
     class="no-print flex flex-col gap-4
            border-b border-knoz-border
@@ -11,25 +14,26 @@
            sm:flex-row sm:items-center
            sm:justify-between
            sm:px-6
-           lg:px-10">
+           lg:px-10"
+  >
 
     <!-- Page Title -->
     <div class="min-w-0">
 
-      <h1 class="text-lg font-semibold
-                 text-knoz-green
-                 sm:text-xl">
-
+      <h1
+        class="text-lg font-semibold
+               text-knoz-green
+               sm:text-xl"
+      >
         {{ getPageText('certificatePreview') }}
-
       </h1>
 
-      <p class="mt-1 text-xs
-                text-gray-500
-                sm:text-sm">
-
+      <p
+        class="mt-1 text-xs
+               text-gray-500
+               sm:text-sm"
+      >
         {{ getPageText('reviewCertificate') }}
-
       </p>
 
     </div>
@@ -38,41 +42,38 @@
     <!-- Actions -->
     <div
       class="no-print flex w-full flex-col gap-2
-             sm:w-auto sm:flex-row sm:items-center
-             sm:gap-3">
+             sm:w-auto sm:flex-row
+             sm:items-center sm:gap-3"
+    >
 
       <!-- Print -->
       <button
         type="button"
         (click)="printCertificate()"
-
         class="w-full rounded-lg
                bg-knoz-gold px-4 py-2
                text-sm font-semibold
                text-knoz-green
                transition hover:opacity-90
-               sm:w-auto sm:px-5">
-
+               sm:w-auto sm:px-5"
+      >
         {{ getPageText('downloadCertificate') }}
-
       </button>
 
 
       <!-- Back -->
       <a
         routerLink="/certificates/create"
-
         class="w-full rounded-lg
-               px-4 py-2 text-center
+               px-4 py-2
+               text-center
                text-sm font-medium
                text-knoz-green
                transition hover:bg-knoz-cream
-               sm:w-auto">
-
+               sm:w-auto"
+      >
         {{ pageDirection === 'rtl' ? '→' : '←' }}
-
         {{ getPageText('back') }}
-
       </a>
 
     </div>
@@ -80,9 +81,11 @@
   </header>
 
 
-  <!-- =========================
-       Preview Area
-       ========================= -->
+
+  <!-- =====================================================
+       PREVIEW AREA
+       ===================================================== -->
+
   <main
     class="certificate-preview-area
            flex min-h-[calc(100vh-5rem)]
@@ -91,62 +94,262 @@
            p-3
            sm:items-center sm:justify-center
            sm:p-6
-           lg:p-8">
-
+           lg:p-8"
+  >
 
     <!-- Certificate Wrapper -->
     <div
       class="certificate-wrapper
              flex min-w-full
              justify-start
-             sm:justify-center">
+             sm:justify-center"
+    >
 
 
-      <!-- =========================
-           Certificate
-           ========================= -->
+      <!-- =================================================
+           CERTIFICATE
+           ================================================= -->
+
       <div
         #certificateElement
-
-        class="certificate-print relative
+        class="certificate-print
+               relative
                aspect-[297/210]
-
                w-[700px]
                max-w-none
                shrink-0
-
                overflow-hidden
-               bg-[#FDFCF8]
                shadow-2xl
-
                sm:w-full
-               sm:max-w-5xl">
+               sm:max-w-5xl"
 
-        <!-- =========================
-             Gold Border
-             ========================= -->
-        <div
-          class="absolute inset-2
-                 border border-knoz-gold
-                 sm:inset-3 sm:border-2
-                 lg:inset-5">
-        </div>
+        [ngClass]="{
+          'bg-[#FDFCF8] text-knoz-green': isClassic,
+          'bg-knoz-green text-knoz-gold': isElegant || isQuran
+        }"
+      >
 
 
-        <!-- =========================
-             Inner Border
-             ========================= -->
-        <div
-          class="absolute inset-4
-                 border border-knoz-gold/40
-                 sm:inset-6
-                 lg:inset-8">
-        </div>
+        <!-- =================================================
+             CLASSIC BORDER
+             ================================================= -->
+
+        @if (isClassic) {
+
+          <!-- Outer Border -->
+          <div
+            class="absolute inset-2
+                   border border-knoz-gold
+                   sm:inset-3 sm:border-2
+                   lg:inset-5"
+          ></div>
 
 
-        <!-- =========================
-             Certificate Content
-             ========================= -->
+          <!-- Inner Border -->
+          <div
+            class="absolute inset-4
+                   border border-knoz-gold/40
+                   sm:inset-6
+                   lg:inset-8"
+          ></div>
+
+        }
+
+
+
+        <!-- =================================================
+             ELEGANT BORDER
+             ================================================= -->
+
+        @if (isElegant) {
+
+          <!-- Main Gold Border -->
+          <div
+            class="absolute inset-2
+                   border border-knoz-gold
+                   sm:inset-3 sm:border-2
+                   lg:inset-5"
+          ></div>
+
+
+          <!-- Inner Gold Border -->
+          <div
+            class="absolute inset-5
+                   border border-knoz-gold/60
+                   sm:inset-7
+                   lg:inset-9"
+          ></div>
+
+
+          <!-- Elegant Corner Decorations -->
+
+          <!-- <span
+            class="absolute left-5 top-4
+                   text-2xl text-knoz-gold
+                   sm:left-7 sm:top-6
+                   sm:text-3xl
+                   lg:left-10 lg:top-8
+                   lg:text-4xl"
+          >
+            ❖
+          </span> -->
+
+
+          <!-- <span
+            class="absolute right-5 top-4
+                   text-2xl text-knoz-gold
+                   sm:right-7 sm:top-6
+                   sm:text-3xl
+                   lg:right-10 lg:top-8
+                   lg:text-4xl"
+          >
+            ❖
+          </span>
+
+
+          <span
+            class="absolute bottom-4 left-5
+                   text-2xl text-knoz-gold
+                   sm:bottom-6 sm:left-7
+                   sm:text-3xl
+                   lg:bottom-8 lg:left-10
+                   lg:text-4xl"
+          >
+            ❖
+          </span>
+
+
+          <span
+            class="absolute bottom-4 right-5
+                   text-2xl text-knoz-gold
+                   sm:bottom-6 sm:right-7
+                   sm:text-3xl
+                   lg:bottom-8 lg:right-10
+                   lg:text-4xl"
+          >
+            ❖
+          </span> -->
+
+        }
+
+
+
+        <!-- =================================================
+             QURAN BORDER + ISLAMIC DECORATION
+             ================================================= -->
+
+        @if (isQuran) {
+
+          <!-- Outer Border -->
+          <div
+            class="absolute inset-2
+                   border-2 border-knoz-gold
+                   sm:inset-3
+                   lg:inset-5"
+          ></div>
+
+
+          <!-- Inner Border -->
+          <div
+            class="absolute inset-4
+                   border border-knoz-gold/70
+                   sm:inset-6
+                   lg:inset-8"
+          ></div>
+
+
+          <!-- Inner Decorative Line -->
+          <div
+            class="absolute inset-6
+                   border border-knoz-gold/30
+                   sm:inset-8
+                   lg:inset-10"
+          ></div>
+
+
+          <!-- Top Left Ornament -->
+          <div
+            class="absolute left-5 top-4
+                   text-xl text-knoz-gold
+                   sm:left-7 sm:top-6
+                   sm:text-2xl
+                   lg:left-10 lg:top-8
+                   lg:text-4xl"
+          >
+            ❈
+          </div>
+
+
+          <!-- Top Right Ornament -->
+          <div
+            class="absolute right-5 top-4
+                   text-xl text-knoz-gold
+                   sm:right-7 sm:top-6
+                   sm:text-2xl
+                   lg:right-10 lg:top-8
+                   lg:text-4xl"
+          >
+            ❈
+          </div>
+
+
+          <!-- Bottom Left Ornament -->
+          <div
+            class="absolute bottom-4 left-5
+                   text-xl text-knoz-gold
+                   sm:bottom-6 sm:left-7
+                   sm:text-2xl
+                   lg:bottom-8 lg:left-10
+                   lg:text-4xl"
+          >
+            ❈
+          </div>
+
+
+          <!-- Bottom Right Ornament -->
+          <div
+            class="absolute bottom-4 right-5
+                   text-xl text-knoz-gold
+                   sm:bottom-6 sm:right-7
+                   sm:text-2xl
+                   lg:bottom-8 lg:right-10
+                   lg:text-4xl"
+          >
+            ❈
+          </div>
+
+
+          <!-- Top Islamic Ornament -->
+          <div
+            class="absolute left-1/2 top-4
+                   -translate-x-1/2
+                   text-lg text-knoz-gold
+                   sm:top-6 sm:text-xl
+                   lg:top-8 lg:text-3xl"
+          >
+            ۞
+          </div>
+
+
+          <!-- Bottom Islamic Ornament -->
+          <div
+            class="absolute bottom-4 left-1/2
+                   -translate-x-1/2
+                   text-lg text-knoz-gold
+                   sm:bottom-6 sm:text-xl
+                   lg:bottom-8 lg:text-3xl"
+          >
+            ۞
+          </div>
+
+        }
+
+
+
+        <!-- =================================================
+             CERTIFICATE CONTENT
+             ================================================= -->
+
         <div
           class="relative z-10
                  flex h-full flex-col
@@ -155,115 +358,184 @@
                  sm:px-10 sm:py-7
                  lg:px-16 lg:py-10"
 
-          [attr.dir]="direction">
+          [attr.dir]="direction"
+        >
 
 
-          <!-- =========================
-               Main Content
-               ========================= -->
+          <!-- =================================================
+               MAIN CONTENT
+               ================================================= -->
+
           <div
             class="certificate-main-content
                    flex w-full flex-1
                    flex-col items-center
-                   justify-around">
+                   justify-around"
+          >
 
 
-            <!-- =========================
-                 Logo
-                 ========================= -->
+            <!-- =================================================
+                 LOGO
+                 ================================================= -->
+
             <div
               class="certificate-brand
-                     flex flex-col items-center">
+                     flex flex-col
+                     items-center"
+            >
 
-              <img
-                src="/assets/logo.jpeg"
-                alt="Knoz Academy"
+              <!-- Classic Logo -->
+              @if (isClassic) {
 
-                class="h-9 w-auto object-contain
-                       sm:h-12
-                       lg:h-20"
-              />
+                <img
+                  src="/assets/logo.jpeg"
+                  alt="Knoz Academy"
+
+                  class="h-9 w-auto
+                         object-contain
+                         sm:h-12
+                         lg:h-20"
+                />
+
+              }
 
 
+              <!-- Elegant Logo -->
+              @if (isElegant) {
+
+                <div
+                  class="flex h-9 w-9
+                         items-center justify-center
+                         rounded-full
+                         border border-knoz-gold
+                         text-sm font-bold
+                         text-knoz-gold
+                         sm:h-12 sm:w-12
+                         sm:text-lg
+                         lg:h-16 lg:w-16
+                         lg:text-2xl"
+                >
+                 K
+                </div>
+
+              }
+
+
+              <!-- Quran Logo -->
+              @if (isQuran) {
+
+                <div
+                  class="flex h-10 w-10
+                         items-center justify-center
+                         rounded-full
+                         border-2 border-knoz-gold
+                         text-lg font-serif
+                         text-knoz-gold
+                         sm:h-14 sm:w-14
+                         sm:text-2xl
+                         lg:h-20 lg:w-20
+                         lg:text-3xl"
+                >
+                  ۞
+                </div>
+
+              }
+
+
+              <!-- Academy Name -->
               <p
-                class="mt-1 text-[7px]
+                class="mt-1
+                       text-[7px]
                        font-semibold
                        tracking-[0.25em]
-                       text-knoz-green
 
                        sm:mt-2
                        sm:text-[9px]
 
                        lg:text-sm
-                       lg:tracking-[0.35em]">
+                       lg:tracking-[0.35em]"
 
+                [ngClass]="{
+                  'text-knoz-green': isClassic,
+                  'text-knoz-gold': isElegant || isQuran
+                }"
+              >
                 {{ getText('academyName') }}
-
               </p>
 
             </div>
 
 
-            <!-- =========================
-                 Certificate Title
-                 ========================= -->
+
+            <!-- =================================================
+                 TITLE
+                 ================================================= -->
+
             <div
               class="certificate-title
                      mt-2
                      sm:mt-3
-                     lg:mt-4">
+                     lg:mt-4"
+            >
 
               <h2
                 class="font-serif
                        text-sm font-bold
                        uppercase
                        tracking-[0.08em]
-                       text-knoz-green
 
                        sm:text-xl
 
                        lg:text-4xl
-                       lg:tracking-[0.12em]">
+                       lg:tracking-[0.12em]"
 
+                [ngClass]="{
+                  'text-knoz-green': isClassic,
+                  'text-knoz-gold': isElegant || isQuran
+                }"
+              >
                 {{ getText('certificateTitle') }}
-
               </h2>
 
 
               <div
                 class="mx-auto mt-1
                        h-0.5 w-12
-                       bg-knoz-gold
+                       sm:mt-2 sm:w-20
+                       lg:mt-3 lg:w-24"
 
-                       sm:mt-2
-                       sm:w-20
-
-                       lg:mt-3
-                       lg:w-24">
-              </div>
+                [ngClass]="{
+                  'bg-knoz-gold': true
+                }"
+              ></div>
 
             </div>
 
 
-            <!-- =========================
-                 Student
-                 ========================= -->
+
+            <!-- =================================================
+                 STUDENT
+                 ================================================= -->
+
             <div
               class="certificate-student
                      mt-3
                      sm:mt-4
-                     lg:mt-5">
+                     lg:mt-5"
+            >
 
               <p
                 class="text-[8px]
                        italic
-                       text-gray-500
-
                        sm:text-[10px]
-                       lg:text-sm">
+                       lg:text-sm"
 
+                [ngClass]="{
+                  'text-gray-500': isClassic,
+                  'text-knoz-gold/80': isElegant || isQuran
+                }"
+              >
                 {{ getText('presentedTo') }}
-
               </p>
 
 
@@ -274,39 +546,47 @@
                        font-serif
                        text-base
                        font-bold
-                       text-knoz-green
 
                        sm:mt-2
                        sm:text-2xl
 
                        lg:mt-3
-                       lg:text-5xl">
+                       lg:text-5xl"
 
+                [ngClass]="{
+                  'text-knoz-green': isClassic,
+                  'text-white': isElegant || isQuran
+                }"
+              >
                 {{ certificate?.studentName }}
-
               </h3>
 
             </div>
 
 
-            <!-- =========================
-                 Course
-                 ========================= -->
+
+            <!-- =================================================
+                 COURSE
+                 ================================================= -->
+
             <div
               class="certificate-course
                      mt-2
                      sm:mt-3
-                     lg:mt-4">
+                     lg:mt-4"
+            >
 
               <p
                 class="text-[8px]
-                       text-gray-500
-
                        sm:text-[10px]
-                       lg:text-sm">
+                       lg:text-sm"
 
+                [ngClass]="{
+                  'text-gray-500': isClassic,
+                  'text-knoz-gold/80': isElegant || isQuran
+                }"
+              >
                 {{ getText('successfullyCompleted') }}
-
               </p>
 
 
@@ -316,66 +596,75 @@
                        truncate
                        text-xs
                        font-semibold
-                       text-knoz-green
 
                        sm:text-base
 
                        lg:mt-2
-                       lg:text-2xl">
+                       lg:text-2xl"
 
+                [ngClass]="{
+                  'text-knoz-green': isClassic,
+                  'text-knoz-gold': isElegant || isQuran
+                }"
+              >
                 {{ certificate?.courseName }}
-
               </p>
 
             </div>
 
 
-            <!-- =========================
-                 Decoration
-                 ========================= -->
+
+            <!-- =================================================
+                 DECORATION
+                 ================================================= -->
+
             <div
               class="certificate-decoration
                      mt-2
-                     flex items-center gap-2
+                     flex items-center
+                     gap-2
 
                      sm:mt-3
                      sm:gap-3
 
-                     lg:mt-4">
+                     lg:mt-4"
+            >
 
               <div
                 class="h-px w-8
-                       bg-knoz-gold/60
                        sm:w-12
-                       lg:w-16">
-              </div>
+                       lg:w-16
+                       bg-knoz-gold/60"
+              ></div>
 
 
               <span
-                class="text-xs text-knoz-gold
+                class="text-xs
+                       text-knoz-gold
                        sm:text-base
-                       lg:text-lg">
-
+                       lg:text-lg"
+              >
                 ✦
-
               </span>
 
 
               <div
                 class="h-px w-8
-                       bg-knoz-gold/60
                        sm:w-12
-                       lg:w-16">
-              </div>
+                       lg:w-16
+                       bg-knoz-gold/60"
+              ></div>
 
             </div>
 
           </div>
 
 
-          <!-- =========================
-               Footer
-               ========================= -->
+
+          <!-- =================================================
+               FOOTER
+               ================================================= -->
+
           <div
             class="certificate-footer
                    grid w-full shrink-0
@@ -384,16 +673,20 @@
                    gap-3 px-2
 
                    sm:gap-6
-                   lg:gap-8">
+
+                   lg:gap-8"
+          >
 
 
-            <!-- =========================
-                 Issue Date
-                 ========================= -->
+            <!-- =================================================
+                 ISSUE DATE
+                 ================================================= -->
+
             <div
               class="flex flex-col
                      items-start
-                     justify-start">
+                     justify-start"
+            >
 
               <!-- Date -->
               <div
@@ -401,19 +694,25 @@
                        items-end
 
                        sm:h-10
-                       lg:h-14">
+
+                       lg:h-14"
+              >
 
                 <p
                   class="whitespace-nowrap
                          text-[8px]
                          font-semibold
-                         text-knoz-green
 
                          sm:text-[10px]
-                         lg:text-sm">
 
+                         lg:text-sm"
+
+                  [ngClass]="{
+                    'text-knoz-green': isClassic,
+                    'text-knoz-gold': isElegant || isQuran
+                  }"
+                >
                   {{ certificate?.issueDate | date:'dd MMMM yyyy' }}
-
                 </p>
 
               </div>
@@ -427,57 +726,80 @@
                        sm:w-24
 
                        lg:mt-2
-                       lg:w-32">
-              </div>
+                       lg:w-32"
+              ></div>
 
 
               <!-- Issue Date -->
               <p
                 class="mt-1
                        text-[7px]
-                       text-gray-400
 
                        sm:text-[9px]
-                       lg:text-xs">
 
+                       lg:text-xs"
+
+                [ngClass]="{
+                  'text-gray-400': isClassic,
+                  'text-knoz-gold/70': isElegant || isQuran
+                }"
+              >
                 {{ getText('issueDate') }}
-
               </p>
 
             </div>
 
 
-            <!-- =========================
-                 QR Code
-                 ========================= -->
+
+            <!-- =================================================
+                 QR CODE
+                 ================================================= -->
+
             <div
               class="certificate-qr
                      flex items-center
                      justify-center
-                     self-center">
+                     self-center"
+            >
 
-              <img
-                [src]="qrCodeUrl"
-                alt="Certificate QR Code"
+              <!-- QR Background -->
+              <div
+                class="rounded-md p-1"
 
-                class="block
-                       h-10 w-10
-                       object-contain
+                [ngClass]="{
+  'bg-white': isClassic,
+  'bg-knoz-green': isElegant || isQuran
+}"
+              >
 
-                       sm:h-14 sm:w-14
-                       lg:h-20 lg:w-20"
-              />
+                <img
+                  [src]="qrCodeUrl"
+                  alt="Certificate QR Code"
+
+                  class="block
+                         h-10 w-10
+                         object-contain
+
+                         sm:h-14 sm:w-14
+
+                         lg:h-20 lg:w-20"
+                />
+
+              </div>
 
             </div>
 
 
-            <!-- =========================
-                 Signature
-                 ========================= -->
+
+            <!-- =================================================
+                 SIGNATURE
+                 ================================================= -->
+
             <div
               class="flex flex-col
                      items-center
-                     justify-start">
+                     justify-start"
+            >
 
               <!-- Signature -->
               <div
@@ -486,7 +808,9 @@
                        justify-center
 
                        sm:h-10
-                       lg:h-14">
+
+                       lg:h-14"
+              >
 
                 <img
                   src="/assets/Signature.png"
@@ -498,6 +822,7 @@
                          object-contain
 
                          sm:max-h-10
+
                          lg:max-h-14"
                 />
 
@@ -512,8 +837,8 @@
                        sm:w-28
 
                        lg:mt-2
-                       lg:w-36">
-              </div>
+                       lg:w-36"
+              ></div>
 
 
               <!-- Academic Director -->
@@ -522,13 +847,16 @@
                        whitespace-nowrap
                        text-[7px]
                        font-medium
-                       text-gray-500
 
                        sm:text-[9px]
-                       lg:text-xs">
 
+                       lg:text-xs"
+                [ngClass]="{
+                  'text-gray-500': isClassic,
+                  'text-knoz-gold/80': isElegant || isQuran
+                }"
+              >
                 {{ getText('academicDirector') }}
-
               </p>
 
             </div>

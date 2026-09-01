@@ -38,7 +38,7 @@
             <div>
                 <label for="studentName" class="block text-sm font-semibold text-knoz-green">
                     <!-- Student Name -->
-                     {{ getText('studentName') }}
+                    {{ getText('studentName') }}
                 </label>
 
                 <input id="studentName" type="text" formControlName="studentName"
@@ -55,7 +55,7 @@
                 ) {
                 <p class="mt-2 text-sm text-red-600">
                     <!-- Please enter the student's name. -->
-                     {{ getText('confirmationStudentEnter') }}
+                    {{ getText('confirmationStudentEnter') }}
                 </p>
                 }
             </div>
@@ -66,7 +66,7 @@
 
                 <label for="courseName" class="block text-sm font-semibold text-knoz-green">
                     <!-- Course / Subject -->
-                     {{ getText('courseSubject') }}
+                    {{ getText('courseSubject') }}
                 </label>
 
                 <input id="courseName" type="text" formControlName="courseName"
@@ -83,7 +83,7 @@
                 ) {
                 <p class="mt-2 text-sm text-red-600">
                     <!-- Please enter the course or subject name. -->
-                     {{ getText('confirmationCoursetEnter') }}
+                    {{ getText('confirmationCoursetEnter') }}
                 </p>
                 }
 
@@ -95,7 +95,7 @@
 
                 <label class="block text-sm font-semibold text-knoz-green">
                     <!-- Certificate Language -->
-                     {{ getText('certificateLanguage') }}
+                    {{ getText('certificateLanguage') }}
                 </label>
 
                 <div class="mt-3 grid gap-3 sm:grid-cols-2">
@@ -136,6 +136,309 @@
 
             </div>
 
+
+            <!-- Certificate Template -->
+
+            <!-- Templates -->
+            <div class="mt-8">
+
+                <!-- Title -->
+                <label class="block text-sm font-medium text-knoz-green">
+                    {{ getText('certificateTemplate') }}
+                </label>
+
+                <!-- Description -->
+                <p class="mt-1 text-sm text-gray-500">
+                    {{ getText('chooseCertificateDesign') }}
+                </p>
+
+
+                <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
+
+
+                    <!-- =========================
+         Classic
+         ========================= -->
+                    <button type="button" (click)="selectTemplate('classic')" class="rounded-xl border-2 bg-white p-3 text-left
+             transition-all duration-200
+             hover:-translate-y-1 hover:shadow-lg"  [ngClass]="
+        selectedTemplate === 'classic'
+          ? 'border-knoz-gold ring-2 ring-knoz-gold/20'
+          : 'border-gray-200'
+      ">
+
+                        <!-- Preview -->
+                        <div class="relative aspect-[297/210] overflow-hidden rounded-lg
+               border border-gray-200 bg-[#FDFCF8]">
+
+                            <!-- Outer Border -->
+                            <div class="absolute inset-2 border border-knoz-gold"></div>
+
+                            <!-- Inner Border -->
+                            <div class="absolute inset-4 border border-knoz-gold/40"></div>
+
+                            <div class="relative flex h-full flex-col
+                 items-center justify-center text-center">
+
+                                <div class="flex h-7 w-7 items-center justify-center
+                   rounded-full bg-knoz-green
+                   text-xs font-bold text-knoz-gold">
+                                    K
+                                </div>
+
+                                <p class="mt-1 text-[5px] font-semibold
+                   tracking-[0.25em] text-knoz-green">
+                                    KNOZ ACADEMY
+                                </p>
+
+                                <p class="mt-3 font-serif text-[10px] font-bold
+                   tracking-wide text-knoz-green">
+                                    {{ getText('certificateTitle') }}
+                                </p>
+
+                                <div class="mt-1 h-px w-10 bg-knoz-gold"></div>
+
+                                <p class="mt-3 font-serif text-[8px] font-bold
+                   text-knoz-green">
+                                    {{ getText('studentName') }}
+                                </p>
+
+                                <p class="mt-1 text-[5px] text-gray-500">
+                                    {{ getText('courseName') }}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Name -->
+                        <div class="mt-3 flex items-center justify-between">
+
+                            <div>
+
+                                <p class="font-semibold text-knoz-green">
+                                    {{ getText('classicTemplate') }}
+                                </p>
+
+                                <p class="mt-1 text-xs text-gray-500">
+                                    {{ getText('classicTemplateDescription') }}
+                                </p>
+
+                            </div>
+
+
+                            @if (selectedTemplate === 'classic') {
+
+                            <span class="flex h-6 w-6 items-center justify-center
+                   rounded-full bg-knoz-gold
+                   text-sm font-bold text-knoz-green">
+                                ✓
+                            </span>
+
+                            }
+
+                        </div>
+
+                    </button>
+
+
+
+                    <!-- =========================
+         Elegant
+         ========================= -->
+                    <button type="button" (click)="selectTemplate('elegant')" class="rounded-xl border-2 bg-white p-3 text-left
+             transition-all duration-200
+             hover:-translate-y-1 hover:shadow-lg" [ngClass]="
+        selectedTemplate === 'elegant'
+          ? 'border-knoz-gold ring-2 ring-knoz-gold/20'
+          : 'border-gray-200'
+      ">
+
+                        <!-- Preview -->
+                        <div class="relative aspect-[297/210] overflow-hidden rounded-lg
+               bg-knoz-green">
+
+                            <div class="absolute inset-2 border border-knoz-gold"></div>
+
+                            <div class="relative flex h-full flex-col
+                 items-center justify-center text-center">
+
+                                <div class="flex h-7 w-7 items-center justify-center
+                   rounded-full border border-knoz-gold
+                   text-xs font-bold text-knoz-gold">
+                                    K
+                                </div>
+
+                                <p class="mt-1 text-[5px] font-semibold
+                   tracking-[0.25em] text-knoz-gold">
+                                    KNOZ ACADEMY
+                                </p>
+
+                                <p class="mt-3 font-serif text-[10px] font-bold
+                   tracking-wide text-knoz-gold">
+                                    {{ getText('certificateTitle') }}
+                                </p>
+
+                                <div class="mt-1 h-px w-10 bg-knoz-gold"></div>
+
+                                <p class="mt-3 font-serif text-[8px] font-bold
+                   text-white">
+                                    {{ getText('studentName') }}
+                                </p>
+
+                                <p class="mt-1 text-[5px] text-knoz-gold/80">
+                                    {{ getText('courseName') }}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Name -->
+                        <div class="mt-3 flex items-center justify-between">
+
+                            <div>
+
+                                <p class="font-semibold text-knoz-green">
+                                    {{ getText('elegantTemplate') }}
+                                </p>
+
+                                <p class="mt-1 text-xs text-gray-500">
+                                    {{ getText('elegantTemplateDescription') }}
+                                </p>
+
+                            </div>
+
+
+                            @if (selectedTemplate === 'elegant') {
+
+                            <span class="flex h-6 w-6 items-center justify-center
+                   rounded-full bg-knoz-gold
+                   text-sm font-bold text-knoz-green">
+                                ✓
+                            </span>
+
+                            }
+
+                        </div>
+
+                    </button>
+
+
+
+                    <!-- =========================
+         Quran
+         ========================= -->
+                    <button type="button" (click)="selectTemplate('quran')" class="rounded-xl border-2 bg-white p-3 text-left
+             transition-all duration-200
+             hover:-translate-y-1 hover:shadow-lg" [ngClass]="
+        selectedTemplate === 'quran'
+          ? 'border-knoz-gold ring-2 ring-knoz-gold/20'
+          : 'border-gray-200'
+      ">
+
+                        <!-- Preview -->
+                        <div class="relative aspect-[297/210] overflow-hidden rounded-lg
+               bg-knoz-green">
+
+                            <!-- Islamic Corners -->
+                            <span class="absolute left-2 top-1 text-sm text-knoz-gold">
+                                ❈
+                            </span>
+
+                            <span class="absolute right-2 top-1 text-sm text-knoz-gold">
+                                ❈
+                            </span>
+
+                            <span class="absolute bottom-1 left-2 text-sm text-knoz-gold">
+                                ❈
+                            </span>
+
+                            <span class="absolute bottom-1 right-2 text-sm text-knoz-gold">
+                                ❈
+                            </span>
+
+
+                            <!-- Borders -->
+                            <div class="absolute inset-2 border border-knoz-gold"></div>
+
+                            <div class="absolute inset-4 border border-knoz-gold/50"></div>
+
+
+                            <div class="relative flex h-full flex-col
+                 items-center justify-center text-center">
+
+                                <span class="text-lg text-knoz-gold">
+                                    ❖
+                                </span>
+
+                                <p class="mt-1 text-[5px] font-semibold
+                   tracking-[0.25em] text-knoz-gold">
+                                    KNOZ ACADEMY
+                                </p>
+
+                                <p class="mt-3 font-serif text-[10px] font-bold
+                   text-knoz-gold">
+                                    {{ getText('certificateTitle') }}
+                                </p>
+
+                                <div class="mt-1 h-px w-10 bg-knoz-gold"></div>
+
+                                <p class="mt-3 font-serif text-[8px] font-bold
+                   text-white">
+                                    {{ getText('studentName') }}
+                                </p>
+
+                                <p class="mt-1 text-[5px] text-knoz-gold/80">
+                                    {{ getText('quranCourse') }}
+                                </p>
+
+                                <span class="absolute bottom-3 text-xs text-knoz-gold">
+                                    ۞
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Name -->
+                        <div class="mt-3 flex items-center justify-between">
+
+                            <div>
+
+                                <p class="font-semibold text-knoz-green">
+                                    {{ getText('quranTemplate') }}
+                                </p>
+
+                                <p class="mt-1 text-xs text-gray-500">
+                                    {{ getText('quranTemplateDescription') }}
+                                </p>
+
+                            </div>
+
+
+                            @if (selectedTemplate === 'quran') {
+
+                            <span class="flex h-6 w-6 items-center justify-center
+                   rounded-full bg-knoz-gold
+                   text-sm font-bold text-knoz-green">
+                                ✓
+                            </span>
+
+                            }
+
+                        </div>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
             <!-- date -->
             <!-- <div class="mt-8">
 
@@ -156,13 +459,13 @@
                 <!-- Section Title -->
                 <label class="block text-sm font-semibold text-knoz-green">
                     <!-- Issue Date -->
-                     {{ getText('issueDate') }}
+                    {{ getText('issueDate') }}
 
                 </label>
 
                 <p class="mt-1 text-sm text-gray-500">
                     <!-- Choose how the certificate issue date should be set. -->
-                     {{ getText('chooseIssueDate') }}
+                    {{ getText('chooseIssueDate') }}
                 </p>
 
 
@@ -183,12 +486,12 @@
 
                                 <p class="font-semibold text-knoz-green">
                                     <!-- Use Today's Date -->
-                                     {{ getText('useTodayDate') }}
+                                    {{ getText('useTodayDate') }}
                                 </p>
 
                                 <p class="mt-1 text-sm text-gray-500">
                                     <!-- The current date will be added automatically. -->
-                                     {{ getText('todayDateDescription') }}
+                                    {{ getText('todayDateDescription') }}
                                 </p>
 
                             </div>
@@ -211,12 +514,12 @@
 
                                 <p class="font-semibold text-knoz-green">
                                     <!-- Choose a Date -->
-                                     {{ getText('chooseDate') }}
+                                    {{ getText('chooseDate') }}
                                 </p>
 
                                 <p class="mt-1 text-sm text-gray-500">
                                     <!-- Select a previous date or today. -->
-                                     {{ getText('chooseDateDescription') }}
+                                    {{ getText('chooseDateDescription') }}
                                 </p>
 
                             </div>
@@ -235,8 +538,8 @@
 
                     <label for="issueDate" class="block text-sm font-semibold text-knoz-green">
                         <!-- Select Issue Date -->
-                         {{ getText('selectIssueDate') }}
-                         
+                        {{ getText('selectIssueDate') }}
+
                     </label>
 
                     <input id="issueDate" type="date" formControlName="issueDate" [max]="yesterday" class="mt-2 w-full rounded-xl border
@@ -253,7 +556,7 @@
 
                     <p class="mt-2 text-sm text-red-600">
                         <!-- Please select an issue date. -->
-                         {{ getText('PleaseSelectIssuedate') }}
+                        {{ getText('PleaseSelectIssuedate') }}
                     </p>
 
                     }
@@ -275,7 +578,7 @@
            disabled:cursor-not-allowed
            disabled:opacity-50">
                     <!-- Generate Certificate -->
-                     {{ getText('generateCertificate') }}
+                    {{ getText('generateCertificate') }}
                 </button>
 
             </div>

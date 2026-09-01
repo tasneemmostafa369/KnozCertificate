@@ -119,6 +119,26 @@ export const DICTIONARY = {
       'تحميل الشهادة',
 
     back: 'رجوع',
+
+
+    certificateTemplate: 'نموذج الشهادة',
+  chooseCertificateDesign:
+    'اختر تصميم الشهادة الذي تريد استخدامه.',
+
+  classicTemplate: 'كلاسيكية',
+  classicTemplateDescription:
+    'تصميم بسيط واحترافي',
+
+  elegantTemplate: 'أنيقة',
+  elegantTemplateDescription:
+    'تصميم فاخر ورسمي',
+
+  quranTemplate: 'قرآنية',
+  quranTemplateDescription:
+    'تصميم إسلامي وتقليدي',
+
+  courseName: 'اسم الدورة',
+  quranCourse: 'القرآن الكريم',
   },
 
   en: {
@@ -246,6 +266,25 @@ export const DICTIONARY = {
       'Download Certificate',
 
     back: 'Back',
+
+    certificateTemplate: 'Certificate Template',
+  chooseCertificateDesign:
+    'Choose the certificate design you want to use.',
+
+  classicTemplate: 'Classic',
+  classicTemplateDescription:
+    'Clean & professional',
+
+  elegantTemplate: 'Elegant',
+  elegantTemplateDescription:
+    'Luxurious & formal',
+
+  quranTemplate: 'Quran',
+  quranTemplateDescription:
+    'Islamic & traditional',
+
+  courseName: 'Course Name',
+  quranCourse: 'Holy Quran',
 
   },
 

@@ -4,6 +4,7 @@ export interface Certificate {
     courseName: string;
     issueDate: string;
     language: 'ar' | 'en' ;
-    template: string;
+    // template: string;
+    templateId: 'classic' | 'elegant' | 'quran';
     signerId: string;
 }

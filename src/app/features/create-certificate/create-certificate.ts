@@ -4,10 +4,12 @@ import { Router, RouterLink } from '@angular/router';
 import { CertificateService } from '../../core/services/certificate-service';
 import { LanguageService } from '../../core/services/language-service';
 import { DICTIONARY } from '../../core/mock/dictionary';
+import { Certificate } from '../../core/models/certificate';
+import {  NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-create-certificate',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, NgClass],
   templateUrl: './create-certificate.html',
   styleUrl: './create-certificate.css',
 })
@@ -17,6 +19,7 @@ export class CreateCertificate {
   private readonly router = inject(Router);
   private readonly certificateService = inject(CertificateService);
   private readonly languageService = inject(LanguageService);
+  selectedTemplate: 'classic' | 'elegant' | 'quran' = 'classic';
 
 
   certificateForm = this.fb.nonNullable.group({
@@ -60,6 +63,12 @@ export class CreateCertificate {
     return date.toISOString().split('T')[0];
   }
 
+  selectTemplate(
+  template: 'classic' | 'elegant' | 'quran'
+): void {
+  this.selectedTemplate = template;
+}
+
   onSubmit(): void {
 
     if (this.certificateForm.invalid) {
@@ -74,7 +83,7 @@ export class CreateCertificate {
         ? new Date().toISOString()
         : new Date(formValue.issueDate).toISOString();
 
-    const certificate = {
+    const certificate:Certificate = {
       id: this.certificateService.generateCertificateId(),
 
       studentName: formValue.studentName.trim(),
@@ -85,7 +94,8 @@ export class CreateCertificate {
 
       language: formValue.language,
 
-      template: 'default',
+      // template: 'default',
+      templateId: this.selectedTemplate,
 
       signerId: 'signer-001',
     };

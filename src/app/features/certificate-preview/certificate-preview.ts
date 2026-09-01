@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CertificateService } from '../../core/services/certificate-service';
 import { RouterLink } from "@angular/router";
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import { DICTIONARY } from '../../core/mock/dictionary';
 import QRCode from 'qrcode';
 import { LanguageService } from '../../core/services/language-service';
@@ -11,7 +11,7 @@ import { LoadingService } from '../../core/services/loading-service';
 
 @Component({
   selector: 'app-certificate-preview',
-  imports: [RouterLink, DatePipe],
+  imports: [RouterLink, DatePipe, NgClass],
   templateUrl: './certificate-preview.html',
   styleUrl: './certificate-preview.css',
 })
@@ -25,6 +25,10 @@ export class CertificatePreview implements OnInit {
   certificate = this.certificateService.getCertificate()
   dictionary = DICTIONARY
   qrCodeUrl = '';
+
+  get templateId(): 'classic' | 'elegant' | 'quran' {
+  return this.certificate?.templateId ?? 'classic';
+}
 
   private readonly languageService = inject(LanguageService);
 
@@ -118,7 +122,17 @@ getPageText(
 }
 
 
+get isClassic(): boolean {
+  return this.certificate?.templateId === 'classic';
+}
 
+get isElegant(): boolean {
+  return this.certificate?.templateId === 'elegant';
+}
+
+get isQuran(): boolean {
+  return this.certificate?.templateId === 'quran';
+}
 
 
 
