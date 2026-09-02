@@ -163,65 +163,50 @@
      Content Scaling
      ========================================= */
 
-  .certificate-print {
+  ::ng-deep .certificate-print {
     font-size: 1.25rem;
   }
 
-
   /* Logo */
-
-  .certificate-brand img {
+  ::ng-deep .certificate-brand img {
     height: 30mm !important;
   }
 
-
   /* Academy Name */
-
-  .certificate-brand p {
+  ::ng-deep .certificate-brand p {
     font-size: 12pt !important;
   }
 
-
   /* Certificate Title */
-
-  .certificate-title h2 {
+  ::ng-deep .certificate-title h2 {
     font-size: 28pt !important;
   }
 
-
   /* Presented Text */
-
-  .certificate-student p {
+  ::ng-deep .certificate-student p {
     font-size: 13pt !important;
   }
 
-
   /* Student Name */
-
-  .certificate-student h3 {
+  ::ng-deep .certificate-student h3 {
     font-size: 32pt !important;
   }
 
-
   /* Course Description */
-
-  .certificate-course > p:first-child {
+  ::ng-deep .certificate-course > p:first-child {
     font-size: 13pt !important;
   }
 
-
   /* Course Name */
-
-  .certificate-course > p:last-child {
+  ::ng-deep .certificate-course > p:last-child {
     font-size: 20pt !important;
   }
-
 
   /* =========================================
      QR Code
      ========================================= */
 
-  .certificate-qr img {
+  ::ng-deep .certificate-qr img {
     display: block !important;
 
     width: 22mm !important;
@@ -236,12 +221,11 @@
     object-fit: contain !important;
   }
 
-
   /* =========================================
      Signature
      ========================================= */
 
-  .certificate-signature {
+  ::ng-deep .certificate-signature {
     max-height: 18mm !important;
     width: auto !important;
   }

@@ -37,18 +37,13 @@ readonly dictionary = DICTIONARY;
 
   // view certificate
   viewCertificate(certificate: Certificate): void {
+    this.loadingService.show();
+    this.certificateService.setCertificate(certificate);
 
-  this.loadingService.show();
-
-  this.certificateService.setCertificate(certificate);
-
-  setTimeout(() => {
-
-    this.router.navigate(['/certificates/preview']);
-
-  }, 300);
-
-}
+    this.router.navigate(['/certificates/preview']).finally(() => {
+      this.loadingService.hide();
+    });
+  }
 
   // delete cetificate
 

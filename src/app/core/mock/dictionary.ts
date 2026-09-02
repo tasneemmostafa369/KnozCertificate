@@ -117,6 +117,8 @@ export const DICTIONARY = {
 
     downloadCertificate:
       'تحميل الشهادة',
+      
+    printCertificate: 'طباعة الشهادة',
 
     back: 'رجوع',
 
@@ -264,6 +266,8 @@ export const DICTIONARY = {
 
     downloadCertificate:
       'Download Certificate',
+      
+    printCertificate: 'Print Certificate',
 
     back: 'Back',
 
